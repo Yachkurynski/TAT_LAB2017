@@ -1,5 +1,6 @@
 package ftpClient.ftpClientCommands.builders;
 
+import ftpClient.ftpClientCommands.Commands;
 import ftpClient.ftpClientCommands.commands.FtpClientCommand;
 import ftpClient.ftpClientCommands.commands.GoIntoFolderCommand;
 
@@ -11,7 +12,7 @@ public class GoIntoFolderCommandBuilder extends FtpClientCommandBuilder {
 
   {
     this.helpParamsForUsage = " <destination_folder_name>";
-    this.commandName = "gointo";
+    this.commandName = Commands.GOINTO.name();
     this.amountOfParams = 2;
   }
 

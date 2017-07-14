@@ -1,5 +1,6 @@
 package ftpClient.ftpClientCommands.builders;
 
+import ftpClient.ftpClientCommands.Commands;
 import ftpClient.ftpClientCommands.commands.ConnectToServerCommand;
 import ftpClient.ftpClientCommands.commands.FtpClientCommand;
 
@@ -13,7 +14,7 @@ public class ConnectToServerCommandBuilder extends FtpClientCommandBuilder {
 
   {
     this.helpParamsForUsage = " <server_URL> <login> <password>";
-    this.commandName = "connect";
+    this.commandName = Commands.CONNECT.name();
     this.amountOfParams = 4;
   }
 

@@ -1,5 +1,6 @@
 package ftpClient.ftpClientCommands.builders;
 
+import ftpClient.ftpClientCommands.Commands;
 import ftpClient.ftpClientCommands.commands.FtpClientCommand;
 import ftpClient.ftpClientCommands.commands.GoOutTheFolderCommand;
 
@@ -8,7 +9,7 @@ import ftpClient.ftpClientCommands.commands.GoOutTheFolderCommand;
  */
 public class GoOutTheFolderCommandBuilder extends FtpClientCommandBuilder {
   {
-    this.commandName = "goout";
+    this.commandName = Commands.GOOUT.name();
   }
 
   public GoOutTheFolderCommandBuilder(FtpClientCommandBuilder nextCommandBuilder) {

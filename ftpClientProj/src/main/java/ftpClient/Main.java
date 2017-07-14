@@ -1,5 +1,6 @@
 package ftpClient;
 
+import ftpClient.ftpClientCommands.Commands;
 import ftpClient.ftpClientCommands.builders.*;
 import ftpClient.ftpClientCommands.commands.FtpClientCommand;
 import org.apache.commons.net.ftp.FTPClient;
@@ -9,7 +10,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 /**
- *
+ * Main class which contains entry point. Program allows to do actions which are described in
+ * Commands class.
  */
 public class Main {
 
@@ -28,7 +30,7 @@ public class Main {
     commandBuilder.printUsage();
 
     try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
-      while (!((enteredString = reader.readLine()).equals("exit"))) {
+      while (!((enteredString = reader.readLine()).equalsIgnoreCase(Commands.EXIT.name()))) {
         command = commandBuilder.getCommand(enteredString);
         command.doCommand(ftpClient);
       }

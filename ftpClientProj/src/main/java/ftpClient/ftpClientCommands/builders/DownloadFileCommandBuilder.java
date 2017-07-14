@@ -1,5 +1,6 @@
 package ftpClient.ftpClientCommands.builders;
 
+import ftpClient.ftpClientCommands.Commands;
 import ftpClient.ftpClientCommands.commands.DownloadFileCommand;
 import ftpClient.ftpClientCommands.commands.FtpClientCommand;
 
@@ -11,7 +12,7 @@ public class DownloadFileCommandBuilder extends FtpClientCommandBuilder {
 
   {
     this.helpParamsForUsage = " <file_name>";
-    this.commandName = "download";
+    this.commandName = Commands.DOWNLOAD.name();
     this.amountOfParams = 2;
   }
 

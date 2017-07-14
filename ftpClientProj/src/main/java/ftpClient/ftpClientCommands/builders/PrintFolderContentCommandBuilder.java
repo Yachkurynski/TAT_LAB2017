@@ -1,5 +1,6 @@
 package ftpClient.ftpClientCommands.builders;
 
+import ftpClient.ftpClientCommands.Commands;
 import ftpClient.ftpClientCommands.commands.FtpClientCommand;
 import ftpClient.ftpClientCommands.commands.PrintFolderContentCommand;
 
@@ -8,7 +9,7 @@ import ftpClient.ftpClientCommands.commands.PrintFolderContentCommand;
  */
 public class PrintFolderContentCommandBuilder extends FtpClientCommandBuilder {
   {
-    this.commandName = "print";
+    this.commandName = Commands.PRINT.name();
   }
 
   public PrintFolderContentCommandBuilder(FtpClientCommandBuilder nextCommandBuilder) {
