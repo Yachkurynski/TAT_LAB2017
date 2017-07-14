@@ -4,52 +4,68 @@ import ftpClient.ftpClientCommands.commands.ConnectToServerCommand;
 import ftpClient.ftpClientCommands.commands.FtpClientCommand;
 
 /**
- *
+ * Builds command which allows to connect to the ftp server.
  */
 public class ConnectToServerCommandBuilder extends FtpClientCommandBuilder {
-    private String serverURL;
-    private String login;
-    private String password;
+  private String serverURL;
+  private String login;
+  private String password;
 
-    {
-        this.commandName = "connect";
-        this.amountOfParams = 3;
+  {
+    this.helpParamsForUsage = " <server_URL> <login> <password>";
+    this.commandName = "connect";
+    this.amountOfParams = 4;
+  }
+
+  public ConnectToServerCommandBuilder(FtpClientCommandBuilder nextCommandBuilder) {
+    this.nextCommandBuilder = nextCommandBuilder;
+  }
+
+  /**
+   * Returns ConnectToServerCommand according to given string command in argument or invokes the same method
+   * for next builder in the chain.
+   *
+   * @param argument given string with command and parameters.
+   * @return Command according to given string command.
+   */
+  @Override
+  public FtpClientCommand getCommand(String argument) {
+    separateCommandFromParams(argument);
+
+    if (givenCommand.equalsIgnoreCase(commandName)) {
+      setParameters();
+
+      return new ConnectToServerCommand(serverURL, login, password);
+    } else if (nextCommandBuilder != null) {
+      return nextCommandBuilder.getCommand(argument);
+    } else {
+      throw new IllegalArgumentException(COMMAND_EXCEPTION_MSG);
     }
+  }
 
-    public ConnectToServerCommandBuilder(FtpClientCommandBuilder nextCommandBuilder) {
-        this.nextCommandBuilder = nextCommandBuilder;
+  /**
+   * Sets parameters needed for creating this Command.
+   */
+  @Override
+  protected void setParameters() {
+    if (consoleArguments.length != amountOfParams) {
+      throw new IllegalArgumentException(PARAMS_EXCEPTION_MSG + commandName);
     }
+    serverURL = consoleArguments[1];
+    login = consoleArguments[2];
+    password = consoleArguments[3];
+  }
 
-    /**
-     * Creates command according to given command name.
-     *
-     * @param givenCommand given command name.
-     * @param params parameters for command creating.
-     * @return command.
-     */
-    public FtpClientCommand getCommand(String givenCommand, String params) {
-        if (givenCommand.equalsIgnoreCase(commandName)) {
-            parseParameters(params);
+  /**
+   * Prints how-to-use instruction to console.
+   */
+  @Override
+  public void printUsage() {
+    this.usage = commandName + helpParamsForUsage;
+    System.out.println(usage);
 
-            return new ConnectToServerCommand(serverURL, login, password);
-        } else if (nextCommandBuilder != null) {
-            return nextCommandBuilder.getCommand(givenCommand, params);
-        } else {
-            throw new IllegalArgumentException(COMMAND_EXCEPTION_MSG);
-        }
+    if (nextCommandBuilder != null) {
+      nextCommandBuilder.printUsage();
     }
-
-    @Override
-    protected void parseParameters(String params) {
-        if (params != null && params.length() != ZERO_PARAMS_LENGTH) {
-            String[] parameters = params.split(PARAMS_SEPARATOR);
-
-            if (parameters.length != amountOfParams) {
-                throw new IllegalArgumentException(PARAMS_EXCEPTION_MSG + commandName);
-            }
-            serverURL = parameters[0];
-            login = parameters[1];
-            password = parameters[2];
-        }
-    }
+  }
 }

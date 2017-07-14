@@ -1,10 +1,27 @@
 package ftpClient.ftpClientCommands.commands;
 
+import org.apache.commons.net.ftp.FTPClient;
+
+import java.io.IOException;
+
 /**
- * Created by Pavel_Yachkurynski on 7/13/2017.
+ * Allows to go out the current directory.
  */
 public class GoOutTheFolderCommand extends FtpClientCommand {
-    public void doCommand() {
 
+  /**
+   * Goes out the current directory.
+   * @param ftpClient FTPClient for managing.
+   * @throws IOException
+   */
+  public void doCommand(FTPClient ftpClient) throws IOException {
+    if (ftpClient.isConnected()) {
+      ftpClient.changeToParentDirectory();
+
+      System.out.println("current dir: " + ftpClient.printWorkingDirectory());
+      printContent(ftpClient);
+    } else {
+      throw new IOException(NO_CONNECTION_MSG);
     }
+  }
 }

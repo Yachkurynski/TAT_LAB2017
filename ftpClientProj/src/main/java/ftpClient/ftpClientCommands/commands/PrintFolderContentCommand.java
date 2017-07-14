@@ -1,10 +1,19 @@
 package ftpClient.ftpClientCommands.commands;
 
+import org.apache.commons.net.ftp.FTPClient;
+import java.io.IOException;
+
 /**
- * Created by Pavel_Yachkurynski on 7/13/2017.
+ * Allows to print folder's content.
  */
 public class PrintFolderContentCommand extends FtpClientCommand {
-    public void doCommand() {
 
-    }
+  /**
+   * Prints folder's content.
+   * @param ftpClient FTPClient for managing.
+   * @throws IOException
+   */
+  public void doCommand(FTPClient ftpClient) throws IOException {
+    printContent(ftpClient);
+  }
 }

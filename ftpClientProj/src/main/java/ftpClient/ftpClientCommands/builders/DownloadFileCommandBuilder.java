@@ -4,35 +4,64 @@ import ftpClient.ftpClientCommands.commands.DownloadFileCommand;
 import ftpClient.ftpClientCommands.commands.FtpClientCommand;
 
 /**
- *
+ * Builds Command which allows to download files from ftp server.
  */
 public class DownloadFileCommandBuilder extends FtpClientCommandBuilder {
-    private String fileName;
+  private String fileName;
 
-    {
-        this.commandName = "download";
-        this.amountOfParams = 1;
+  {
+    this.helpParamsForUsage = " <file_name>";
+    this.commandName = "download";
+    this.amountOfParams = 2;
+  }
+
+  public DownloadFileCommandBuilder(FtpClientCommandBuilder nextCommandBuilder) {
+    this.nextCommandBuilder = nextCommandBuilder;
+  }
+
+  /**
+   * Returns DownloadFileCommand according to given string command in argument or invokes the same
+   * method for next builder in the chain.
+   *
+   * @param argument given string with command and parameters.
+   * @return Command according to given string command.
+   */
+  public FtpClientCommand getCommand(String argument) {
+    separateCommandFromParams(argument);
+
+    if (givenCommand.equalsIgnoreCase(commandName)) {
+      setParameters();
+
+      return new DownloadFileCommand(fileName);
+    } else if (nextCommandBuilder != null) {
+      return nextCommandBuilder.getCommand(argument);
+    } else {
+      throw new IllegalArgumentException(COMMAND_EXCEPTION_MSG);
     }
+  }
 
-    public DownloadFileCommandBuilder(FtpClientCommandBuilder nextCommandBuilder) {
-        this.nextCommandBuilder = nextCommandBuilder;
+  /**
+   * Sets parameters needed for creating this Command.
+   */
+  @Override
+  protected void setParameters() {
+    if (consoleArguments.length != amountOfParams) {
+      throw new IllegalArgumentException(PARAMS_EXCEPTION_MSG + commandName);
     }
+    givenCommand = consoleArguments[0];
+    fileName = consoleArguments[1];
+  }
 
-    public FtpClientCommand getCommand(String givenCommand, String params) {
-        if (givenCommand.equalsIgnoreCase(commandName)) {
-            parseParameters(params);
+  /**
+   * Prints how-to-use instruction to console.
+   */
+  @Override
+  public void printUsage() {
+    this.usage = commandName + helpParamsForUsage;
+    System.out.println(usage);
 
-            return new DownloadFileCommand(fileName);
-        } else if (nextCommandBuilder != null) {
-            return nextCommandBuilder.getCommand(givenCommand, params);
-        } else {
-            throw new IllegalArgumentException(COMMAND_EXCEPTION_MSG);
-        }
+    if (nextCommandBuilder != null) {
+      nextCommandBuilder.printUsage();
     }
-
-    protected void parseParameters(String params) {
-        if (params != null && params.length() != ZERO_PARAMS_LENGTH) {
-            fileName = params.trim();
-        }
-    }
+  }
 }

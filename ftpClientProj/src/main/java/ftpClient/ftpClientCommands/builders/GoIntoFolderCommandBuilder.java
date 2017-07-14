@@ -4,35 +4,64 @@ import ftpClient.ftpClientCommands.commands.FtpClientCommand;
 import ftpClient.ftpClientCommands.commands.GoIntoFolderCommand;
 
 /**
- *
+ * Builds Command which allows to open some folder in current directory.
  */
 public class GoIntoFolderCommandBuilder extends FtpClientCommandBuilder {
-    private String folderName;
+  private String folderName;
 
-    {
-        this.commandName = "gointo";
-        this.amountOfParams = 1;
+  {
+    this.helpParamsForUsage = " <destination_folder_name>";
+    this.commandName = "gointo";
+    this.amountOfParams = 2;
+  }
+
+  public GoIntoFolderCommandBuilder(FtpClientCommandBuilder nextCommandBuilder) {
+    this.nextCommandBuilder = nextCommandBuilder;
+  }
+
+  /**
+   * Returns GoIntoFolderCommand according to given string command in argument or invokes the same
+   * method for next builder in the chain.
+   *
+   * @param argument given string with command and parameters.
+   * @return Command according to given string command.
+   */
+  public FtpClientCommand getCommand(String argument) {
+    separateCommandFromParams(argument);
+
+    if (givenCommand.equalsIgnoreCase(commandName)) {
+      setParameters();
+
+      return new GoIntoFolderCommand(folderName);
+    } else if (nextCommandBuilder != null) {
+      return nextCommandBuilder.getCommand(argument);
+    } else {
+      throw new IllegalArgumentException(COMMAND_EXCEPTION_MSG);
     }
+  }
 
-    public GoIntoFolderCommandBuilder(FtpClientCommandBuilder nextCommandBuilder) {
-        this.nextCommandBuilder = nextCommandBuilder;
+  /**
+   * Sets parameters needed for creating this Command.
+   */
+  @Override
+  protected void setParameters() {
+    if (consoleArguments.length != amountOfParams) {
+      throw new IllegalArgumentException(PARAMS_EXCEPTION_MSG + commandName);
     }
+    givenCommand = consoleArguments[0];
+    folderName = consoleArguments[1];
+  }
 
-    public FtpClientCommand getCommand(String givenCommand, String params) {
-        if (givenCommand.equalsIgnoreCase(commandName)) {
-            parseParameters(params);
+  /**
+   * Prints how-to-use instruction to console.
+   */
+  @Override
+  public void printUsage() {
+    this.usage = commandName + helpParamsForUsage;
+    System.out.println(usage);
 
-            return new GoIntoFolderCommand(folderName);
-        } else if (nextCommandBuilder != null) {
-            return nextCommandBuilder.getCommand(givenCommand, params);
-        } else {
-            throw new IllegalArgumentException(COMMAND_EXCEPTION_MSG);
-        }
+    if (nextCommandBuilder != null) {
+      nextCommandBuilder.printUsage();
     }
-
-    protected void parseParameters(String params) {
-        if (params != null && params.length() != ZERO_PARAMS_LENGTH) {
-            folderName =  params.trim();
-        }
-    }
+  }
 }
