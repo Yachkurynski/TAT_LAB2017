@@ -31,8 +31,12 @@ public class Main {
 
     try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
       while (!((enteredString = reader.readLine()).equalsIgnoreCase(Commands.EXIT.name()))) {
-        command = commandBuilder.getCommand(enteredString);
-        command.doCommand(ftpClient);
+        try {
+          command = commandBuilder.getCommand(enteredString);
+          command.doCommand(ftpClient);
+        } catch (IllegalArgumentException | NullPointerException | IOException ex) {
+          System.out.println(ex.getLocalizedMessage());
+        }
       }
     } catch (IOException e) {
       System.out.println(e.getLocalizedMessage());
