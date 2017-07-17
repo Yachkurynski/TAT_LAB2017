@@ -1,4 +1,4 @@
-package ftpClient.ftpClientCommands.commands;
+package com.epam.ftpClient.ftpClientCommands.commands;
 
 import org.apache.commons.net.ftp.FTPClient;
 import java.io.IOException;

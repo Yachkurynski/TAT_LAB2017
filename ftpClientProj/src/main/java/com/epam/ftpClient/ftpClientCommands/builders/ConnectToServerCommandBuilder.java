@@ -1,8 +1,8 @@
-package ftpClient.ftpClientCommands.builders;
+package com.epam.ftpClient.ftpClientCommands.builders;
 
-import ftpClient.ftpClientCommands.Commands;
-import ftpClient.ftpClientCommands.commands.ConnectToServerCommand;
-import ftpClient.ftpClientCommands.commands.FtpClientCommand;
+import com.epam.ftpClient.ftpClientCommands.Commands;
+import com.epam.ftpClient.ftpClientCommands.commands.ConnectToServerCommand;
+import com.epam.ftpClient.ftpClientCommands.commands.FtpClientCommand;
 
 /**
  * Builds command which allows to connect to the ftp server.

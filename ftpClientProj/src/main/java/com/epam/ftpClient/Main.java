@@ -1,8 +1,13 @@
-package ftpClient;
+package com.epam.ftpClient;
 
-import ftpClient.ftpClientCommands.Commands;
-import ftpClient.ftpClientCommands.builders.*;
-import ftpClient.ftpClientCommands.commands.FtpClientCommand;
+import com.epam.ftpClient.ftpClientCommands.Commands;
+import com.epam.ftpClient.ftpClientCommands.builders.ConnectToServerCommandBuilder;
+import com.epam.ftpClient.ftpClientCommands.builders.DownloadFileCommandBuilder;
+import com.epam.ftpClient.ftpClientCommands.builders.FtpClientCommandBuilder;
+import com.epam.ftpClient.ftpClientCommands.builders.GoIntoFolderCommandBuilder;
+import com.epam.ftpClient.ftpClientCommands.builders.GoOutTheFolderCommandBuilder;
+import com.epam.ftpClient.ftpClientCommands.builders.PrintFolderContentCommandBuilder;
+import com.epam.ftpClient.ftpClientCommands.commands.FtpClientCommand;
 import org.apache.commons.net.ftp.FTPClient;
 
 import java.io.BufferedReader;

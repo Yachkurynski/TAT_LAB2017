@@ -1,6 +1,6 @@
-package ftpClient.ftpClientCommands.builders;
+package com.epam.ftpClient.ftpClientCommands.builders;
 
-import ftpClient.ftpClientCommands.commands.FtpClientCommand;
+import com.epam.ftpClient.ftpClientCommands.commands.FtpClientCommand;
 
 /**
  * Parent class for all the command builders.

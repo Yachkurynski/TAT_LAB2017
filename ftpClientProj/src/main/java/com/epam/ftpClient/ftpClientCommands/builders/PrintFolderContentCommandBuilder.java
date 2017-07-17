@@ -1,24 +1,24 @@
-package ftpClient.ftpClientCommands.builders;
+package com.epam.ftpClient.ftpClientCommands.builders;
 
-import ftpClient.ftpClientCommands.Commands;
-import ftpClient.ftpClientCommands.commands.FtpClientCommand;
-import ftpClient.ftpClientCommands.commands.GoOutTheFolderCommand;
+import com.epam.ftpClient.ftpClientCommands.Commands;
+import com.epam.ftpClient.ftpClientCommands.commands.FtpClientCommand;
+import com.epam.ftpClient.ftpClientCommands.commands.PrintFolderContentCommand;
 
 /**
- * Builds Command which allows to go out the current directory.
+ * Builds Command which allows to print content of the current directory.
  */
-public class GoOutTheFolderCommandBuilder extends FtpClientCommandBuilder {
+public class PrintFolderContentCommandBuilder extends FtpClientCommandBuilder {
   {
-    this.commandName = Commands.GOOUT.name();
+    this.commandName = Commands.PRINT.name();
   }
 
-  public GoOutTheFolderCommandBuilder(FtpClientCommandBuilder nextCommandBuilder) {
+  public PrintFolderContentCommandBuilder(FtpClientCommandBuilder nextCommandBuilder) {
     this.nextCommandBuilder = nextCommandBuilder;
   }
 
   /**
-   * Returns GoOutTheFolderCommand according to given string command in argument or invokes the
-   * same method for next builder in the chain.
+   * Returns PrintFolderContentCommand according to given string command in argument or invokes
+   * the same method for next builder in the chain.
    *
    * @param argument given string with command and parameters.
    * @return Command according to given string command.
@@ -27,7 +27,7 @@ public class GoOutTheFolderCommandBuilder extends FtpClientCommandBuilder {
     separateCommandFromParams(argument);
 
     if (givenCommand.equalsIgnoreCase(commandName)) {
-      return new GoOutTheFolderCommand();
+      return new PrintFolderContentCommand();
     } else if (nextCommandBuilder != null) {
       return nextCommandBuilder.getCommand(argument);
     } else {

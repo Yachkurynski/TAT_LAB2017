@@ -1,8 +1,8 @@
-package ftpClient.ftpClientCommands.builders;
+package com.epam.ftpClient.ftpClientCommands.builders;
 
-import ftpClient.ftpClientCommands.Commands;
-import ftpClient.ftpClientCommands.commands.DownloadFileCommand;
-import ftpClient.ftpClientCommands.commands.FtpClientCommand;
+import com.epam.ftpClient.ftpClientCommands.Commands;
+import com.epam.ftpClient.ftpClientCommands.commands.DownloadFileCommand;
+import com.epam.ftpClient.ftpClientCommands.commands.FtpClientCommand;
 
 /**
  * Builds Command which allows to download files from ftp server.

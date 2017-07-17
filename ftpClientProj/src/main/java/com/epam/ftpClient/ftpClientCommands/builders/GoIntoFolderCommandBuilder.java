@@ -1,8 +1,8 @@
-package ftpClient.ftpClientCommands.builders;
+package com.epam.ftpClient.ftpClientCommands.builders;
 
-import ftpClient.ftpClientCommands.Commands;
-import ftpClient.ftpClientCommands.commands.FtpClientCommand;
-import ftpClient.ftpClientCommands.commands.GoIntoFolderCommand;
+import com.epam.ftpClient.ftpClientCommands.Commands;
+import com.epam.ftpClient.ftpClientCommands.commands.FtpClientCommand;
+import com.epam.ftpClient.ftpClientCommands.commands.GoIntoFolderCommand;
 
 /**
  * Builds Command which allows to open some folder in current directory.
