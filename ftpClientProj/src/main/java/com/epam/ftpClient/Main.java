@@ -1,13 +1,12 @@
 package com.epam.ftpClient;
 
-import com.epam.ftpClient.ftpClientCommands.Commands;
-import com.epam.ftpClient.ftpClientCommands.builders.ConnectToServerCommandBuilder;
-import com.epam.ftpClient.ftpClientCommands.builders.DownloadFileCommandBuilder;
-import com.epam.ftpClient.ftpClientCommands.builders.FtpClientCommandBuilder;
-import com.epam.ftpClient.ftpClientCommands.builders.GoIntoFolderCommandBuilder;
-import com.epam.ftpClient.ftpClientCommands.builders.GoOutTheFolderCommandBuilder;
-import com.epam.ftpClient.ftpClientCommands.builders.PrintFolderContentCommandBuilder;
-import com.epam.ftpClient.ftpClientCommands.commands.FtpClientCommand;
+import com.epam.ftpClient.ftp_client_commands.Commands;
+import com.epam.ftpClient.ftp_client_commands.builders.ConnectToServerCommandBuilder;
+import com.epam.ftpClient.ftp_client_commands.builders.DownloadFileCommandBuilder;
+import com.epam.ftpClient.ftp_client_commands.builders.FtpClientCommandBuilder;
+import com.epam.ftpClient.ftp_client_commands.builders.GoIntoFolderCommandBuilder;
+import com.epam.ftpClient.ftp_client_commands.builders.GoOutTheFolderCommandBuilder;
+import com.epam.ftpClient.ftp_client_commands.builders.PrintFolderContentCommandBuilder;
 import org.apache.commons.net.ftp.FTPClient;
 
 import java.io.BufferedReader;
@@ -26,33 +25,22 @@ public class Main {
    */
   public static void main(String[] args) {
     String enteredString;
-    FtpClientCommand command;
     FTPClient ftpClient = new FTPClient();
     FtpClientCommandBuilder commandBuilder = new ConnectToServerCommandBuilder(
         new DownloadFileCommandBuilder(new GoIntoFolderCommandBuilder(
             new GoOutTheFolderCommandBuilder(new PrintFolderContentCommandBuilder(null)))));
+    ClientManager clientManager = new ClientManager(commandBuilder);
 
     commandBuilder.printUsage();
 
     try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
       while (!((enteredString = reader.readLine()).equalsIgnoreCase(Commands.EXIT.name()))) {
-        try {
-          command = commandBuilder.getCommand(enteredString);
-          command.doCommand(ftpClient);
-        } catch (IllegalArgumentException | NullPointerException | IOException ex) {
-          System.out.println(ex.getLocalizedMessage());
-        }
+        clientManager.performCommand(enteredString, ftpClient);
       }
     } catch (IOException e) {
       System.out.println(e.getLocalizedMessage());
     } finally {
-      if (ftpClient.isConnected()) {
-        try {
-          ftpClient.disconnect();
-        } catch (IOException e) {
-          System.out.println(e.getLocalizedMessage());
-        }
-      }
+      clientManager.closeConnection(ftpClient);
     }
   }
 }

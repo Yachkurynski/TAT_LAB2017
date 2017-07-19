@@ -1,4 +1,4 @@
-package com.epam.ftpClient.ftpClientCommands.commands;
+package com.epam.ftpClient.ftp_client_commands.commands;
 
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
@@ -9,9 +9,8 @@ import java.io.IOException;
  * Parent class for all available commands, which can to perform ftp client.
  */
 public abstract class FtpClientCommand {
-  public static final String NO_CONNECTION_MSG = "There is no connection to server!";
-  public static final String FILE_IDENTIFIER = "f: ";
-  public static final String DIRECTORY_IDENTIFIER = "d: ";
+  public static final String FOLDER_NAME_BEGIN = "[";
+  public static final String FOLDER_NAME_END = "]";
 
   /**
    * Does some command.
@@ -24,15 +23,12 @@ public abstract class FtpClientCommand {
    * @throws IOException
    */
   protected void printContent(FTPClient ftpClient) throws IOException {
-    if (ftpClient.isConnected()) {
       FTPFile[] content = ftpClient.listFiles();
 
       for (FTPFile file : content) {
-        String prefix = file.isFile() ? FILE_IDENTIFIER : DIRECTORY_IDENTIFIER;
-        System.out.println(prefix + file.getName());
+        String objectName = file.isFile() ? file.getName() : FOLDER_NAME_BEGIN + file.getName() +
+            FOLDER_NAME_END;
+        System.out.println(objectName);
       }
-    } else {
-      throw new IOException(NO_CONNECTION_MSG);
-    }
   }
 }

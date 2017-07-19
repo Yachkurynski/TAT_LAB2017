@@ -1,8 +1,8 @@
-package com.epam.ftpClient.ftpClientCommands.builders;
+package com.epam.ftpClient.ftp_client_commands.builders;
 
-import com.epam.ftpClient.ftpClientCommands.Commands;
-import com.epam.ftpClient.ftpClientCommands.commands.DownloadFileCommand;
-import com.epam.ftpClient.ftpClientCommands.commands.FtpClientCommand;
+import com.epam.ftpClient.ftp_client_commands.Commands;
+import com.epam.ftpClient.ftp_client_commands.commands.DownloadFileCommand;
+import com.epam.ftpClient.ftp_client_commands.commands.FtpClientCommand;
 
 /**
  * Builds Command which allows to download files from ftp server.
@@ -10,14 +10,11 @@ import com.epam.ftpClient.ftpClientCommands.commands.FtpClientCommand;
 public class DownloadFileCommandBuilder extends FtpClientCommandBuilder {
   private String fileName;
 
-  {
+  public DownloadFileCommandBuilder(FtpClientCommandBuilder nextCommandBuilder) {
+    this.nextCommandBuilder = nextCommandBuilder;
     this.helpParamsForUsage = " <file_name>";
     this.commandName = Commands.DOWNLOAD.name();
     this.amountOfParams = 2;
-  }
-
-  public DownloadFileCommandBuilder(FtpClientCommandBuilder nextCommandBuilder) {
-    this.nextCommandBuilder = nextCommandBuilder;
   }
 
   /**

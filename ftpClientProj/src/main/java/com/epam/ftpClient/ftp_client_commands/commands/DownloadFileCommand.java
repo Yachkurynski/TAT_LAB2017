@@ -1,4 +1,4 @@
-package com.epam.ftpClient.ftpClientCommands.commands;
+package com.epam.ftpClient.ftp_client_commands.commands;
 
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
@@ -25,7 +25,6 @@ public class DownloadFileCommand extends FtpClientCommand {
    * @throws IOException
    */
   public void doCommand(FTPClient ftpClient) throws IOException {
-    if (ftpClient.isConnected()) {
       FTPFile[] files = ftpClient.listFiles();
 
       for (FTPFile file : files) {
@@ -35,9 +34,6 @@ public class DownloadFileCommand extends FtpClientCommand {
           saveFile(currentFileName, ftpClient);
         }
       }
-    } else {
-      throw new IOException(NO_CONNECTION_MSG);
-    }
   }
 
   /**

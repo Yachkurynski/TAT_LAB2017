@@ -1,4 +1,4 @@
-package com.epam.ftpClient.ftpClientCommands.commands;
+package com.epam.ftpClient.ftp_client_commands.commands;
 
 import org.apache.commons.net.ftp.FTPClient;
 

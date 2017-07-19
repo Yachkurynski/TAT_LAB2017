@@ -1,19 +1,17 @@
-package com.epam.ftpClient.ftpClientCommands.builders;
+package com.epam.ftpClient.ftp_client_commands.builders;
 
-import com.epam.ftpClient.ftpClientCommands.Commands;
-import com.epam.ftpClient.ftpClientCommands.commands.FtpClientCommand;
-import com.epam.ftpClient.ftpClientCommands.commands.PrintFolderContentCommand;
+import com.epam.ftpClient.ftp_client_commands.Commands;
+import com.epam.ftpClient.ftp_client_commands.commands.FtpClientCommand;
+import com.epam.ftpClient.ftp_client_commands.commands.PrintFolderContentCommand;
 
 /**
  * Builds Command which allows to print content of the current directory.
  */
 public class PrintFolderContentCommandBuilder extends FtpClientCommandBuilder {
-  {
-    this.commandName = Commands.PRINT.name();
-  }
 
   public PrintFolderContentCommandBuilder(FtpClientCommandBuilder nextCommandBuilder) {
     this.nextCommandBuilder = nextCommandBuilder;
+    this.commandName = Commands.PRINT.name();
   }
 
   /**

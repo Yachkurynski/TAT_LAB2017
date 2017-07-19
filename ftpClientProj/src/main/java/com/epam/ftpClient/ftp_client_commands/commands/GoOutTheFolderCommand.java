@@ -1,4 +1,4 @@
-package com.epam.ftpClient.ftpClientCommands.commands;
+package com.epam.ftpClient.ftp_client_commands.commands;
 
 import org.apache.commons.net.ftp.FTPClient;
 
@@ -15,13 +15,9 @@ public class GoOutTheFolderCommand extends FtpClientCommand {
    * @throws IOException
    */
   public void doCommand(FTPClient ftpClient) throws IOException {
-    if (ftpClient.isConnected()) {
       ftpClient.changeToParentDirectory();
 
       System.out.println("current dir: " + ftpClient.printWorkingDirectory());
       printContent(ftpClient);
-    } else {
-      throw new IOException(NO_CONNECTION_MSG);
-    }
   }
 }

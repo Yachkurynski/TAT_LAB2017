@@ -1,4 +1,4 @@
-package com.epam.ftpClient.ftpClientCommands.commands;
+package com.epam.ftpClient.ftp_client_commands.commands;
 
 import org.apache.commons.net.ftp.FTPClient;
 
@@ -21,13 +21,9 @@ public class GoIntoFolderCommand extends FtpClientCommand {
    * @throws IOException
    */
   public void doCommand(FTPClient ftpClient) throws IOException {
-    if (ftpClient.isConnected()) {
       ftpClient.changeWorkingDirectory(folderName);
 
       System.out.println(CURRENT_DIR_MSG + ftpClient.printWorkingDirectory());
       printContent(ftpClient);
-    } else {
-      throw new IOException(NO_CONNECTION_MSG);
-    }
   }
 }

@@ -1,42 +1,36 @@
-package com.epam.ftpClient.ftpClientCommands.builders;
+package com.epam.ftpClient.ftp_client_commands.builders;
 
-import com.epam.ftpClient.ftpClientCommands.Commands;
-import com.epam.ftpClient.ftpClientCommands.commands.ConnectToServerCommand;
-import com.epam.ftpClient.ftpClientCommands.commands.FtpClientCommand;
+import com.epam.ftpClient.ftp_client_commands.Commands;
+import com.epam.ftpClient.ftp_client_commands.commands.FtpClientCommand;
+import com.epam.ftpClient.ftp_client_commands.commands.GoIntoFolderCommand;
 
 /**
- * Builds command which allows to connect to the ftp server.
+ * Builds Command which allows to open some folder in current directory.
  */
-public class ConnectToServerCommandBuilder extends FtpClientCommandBuilder {
-  private String serverURL;
-  private String login;
-  private String password;
+public class GoIntoFolderCommandBuilder extends FtpClientCommandBuilder {
+  private String folderName;
 
-  {
-    this.helpParamsForUsage = " <server_URL> <login> <password>";
-    this.commandName = Commands.CONNECT.name();
-    this.amountOfParams = 4;
-  }
-
-  public ConnectToServerCommandBuilder(FtpClientCommandBuilder nextCommandBuilder) {
+  public GoIntoFolderCommandBuilder(FtpClientCommandBuilder nextCommandBuilder) {
     this.nextCommandBuilder = nextCommandBuilder;
+    this.helpParamsForUsage = " <destination_folder_name>";
+    this.commandName = Commands.GOINTO.name();
+    this.amountOfParams = 2;
   }
 
   /**
-   * Returns ConnectToServerCommand according to given string command in argument or invokes the same method
-   * for next builder in the chain.
+   * Returns GoIntoFolderCommand according to given string command in argument or invokes the same
+   * method for next builder in the chain.
    *
    * @param argument given string with command and parameters.
    * @return Command according to given string command.
    */
-  @Override
   public FtpClientCommand getCommand(String argument) {
     separateCommandFromParams(argument);
 
     if (givenCommand.equalsIgnoreCase(commandName)) {
       setParameters();
 
-      return new ConnectToServerCommand(serverURL, login, password);
+      return new GoIntoFolderCommand(folderName);
     } else if (nextCommandBuilder != null) {
       return nextCommandBuilder.getCommand(argument);
     } else {
@@ -52,9 +46,8 @@ public class ConnectToServerCommandBuilder extends FtpClientCommandBuilder {
     if (consoleArguments.length != amountOfParams) {
       throw new IllegalArgumentException(PARAMS_EXCEPTION_MSG + commandName);
     }
-    serverURL = consoleArguments[1];
-    login = consoleArguments[2];
-    password = consoleArguments[3];
+    givenCommand = consoleArguments[0];
+    folderName = consoleArguments[1];
   }
 
   /**

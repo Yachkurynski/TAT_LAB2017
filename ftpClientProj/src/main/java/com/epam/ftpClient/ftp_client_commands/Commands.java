@@ -1,4 +1,4 @@
-package com.epam.ftpClient.ftpClientCommands;
+package com.epam.ftpClient.ftp_client_commands;
 
 /**
  * Contains all the commands.
