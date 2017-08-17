@@ -1,6 +1,6 @@
 package com.yammer.tests;
 
-import static org.testng.Assert.assertTrue;
+import static org.junit.Assert.assertTrue;
 
 import com.yammer.business_objects.Group;
 import com.yammer.business_objects.User;
@@ -9,9 +9,9 @@ import com.yammer.steps.LoginSteps;
 import com.yammer.steps.PostSteps;
 import com.yammer.steps.UserSteps;
 import com.yammer.utils.Browser;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 public class BookmarkTests {
 
@@ -23,7 +23,7 @@ public class BookmarkTests {
   private User user;
   private Group wildBamboleosGroup;
 
-  @BeforeMethod
+  @Before
   public void setUp() throws Exception {
     user = new User("ararat@epam.com", "conditional");
     wildBamboleosGroup = new Group("Wild Bamboleos");
@@ -46,7 +46,7 @@ public class BookmarkTests {
     postSteps.deletePostFromBookmark();
   }
 
-  @AfterMethod
+  @After
   public void tearDown() throws Exception {
     Browser.kill();
   }

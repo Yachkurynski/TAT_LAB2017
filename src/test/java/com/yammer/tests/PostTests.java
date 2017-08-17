@@ -1,8 +1,8 @@
 package com.yammer.tests;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNotEquals;
-import static org.testng.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
 
 import com.yammer.business_objects.Group;
 import com.yammer.business_objects.Post;
@@ -12,10 +12,10 @@ import com.yammer.steps.LoginSteps;
 import com.yammer.steps.PostSteps;
 import com.yammer.steps.UserSteps;
 import com.yammer.utils.Browser;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.junit.After;
+import org.junit.BeforeClass;
+import org.junit.Before;
+import org.junit.Test;
 
 public class PostTests {
 
@@ -33,7 +33,7 @@ public class PostTests {
     wildBamboleosGroup = new Group("Wild Bamboleos");
   }
 
-  @BeforeMethod
+  @Before
   public void setUp() throws Exception {
     browser = Browser.getBrowserInstance();
     groupSteps = new GroupSteps();
@@ -72,7 +72,7 @@ public class PostTests {
     assertNotEquals(postSteps.getLastPostText(), user.getPost().getBody());
   }
 
-  @AfterMethod
+  @After
   public void tearDown() throws Exception {
     Browser.kill();
   }
