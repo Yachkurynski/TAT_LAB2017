@@ -9,7 +9,9 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -42,7 +44,16 @@ public class Browser {
 
   private static Browser init() {
     System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
-    WebDriver driver = new ChromeDriver();
+
+
+    DesiredCapabilities chrome = DesiredCapabilities.chrome();
+    ChromeOptions options = new ChromeOptions();
+    options.addArguments("--start-maximized");
+    options.addArguments("test-type");
+    chrome.setCapability(ChromeOptions.CAPABILITY, options);
+    WebDriver driver = new ChromeDriver(chrome);
+
+    System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
 
     try {
       driver.manage().timeouts()
