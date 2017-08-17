@@ -27,7 +27,7 @@ public class Browser {
   private Actions actions;
   private static Browser instance;
   private static final int WAIT_ELEMENT_TIMEOUT = 10;
-  private static final int PAGE_LOAD_DEFAULT_TIMEOUT_SECONDS = 40;
+  private static final int PAGE_LOAD_DEFAULT_TIMEOUT_SECONDS = 60;
   private static final int COMMAND_DEFAULT_TIMEOUT_SECONDS = 20;
 
   private Browser(WebDriver driver) {
@@ -44,16 +44,7 @@ public class Browser {
 
   private static Browser init() {
     System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
-
-
-    DesiredCapabilities chrome = DesiredCapabilities.chrome();
-    ChromeOptions options = new ChromeOptions();
-    options.addArguments("--start-maximized");
-    options.addArguments("test-type");
-    chrome.setCapability(ChromeOptions.CAPABILITY, options);
-    WebDriver driver = new ChromeDriver(chrome);
-
-    System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
+    WebDriver driver = new ChromeDriver();
 
     try {
       driver.manage().timeouts()
