@@ -1,7 +1,6 @@
 package com.yammer.tests;
 
-
-import static org.junit.Assert.assertEquals;
+import static org.testng.Assert.assertEquals;
 
 import com.yammer.business_objects.Comment;
 import com.yammer.business_objects.Group;
@@ -12,10 +11,10 @@ import com.yammer.steps.GroupSteps;
 import com.yammer.steps.LoginSteps;
 import com.yammer.steps.PostSteps;
 import com.yammer.utils.Browser;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 public class CommentTests {
 
@@ -29,11 +28,16 @@ public class CommentTests {
 
   @BeforeClass
   public void beforeClass() {
-    user = new User("ararat@epam.com", "conditional");
+    /*
+    String name = System.getProperty("username");
+    String password = System.getProperty("password");
+    user = new User(name, password);
+    */
+    user = new User("araratk@epam.com","promololol");
     wildBamboleosGroup = new Group("Wild Bamboleos");
   }
 
-  @Before
+  @BeforeMethod
   public void setUp() throws Exception {
     browser = Browser.getBrowserInstance();
     commentSteps = new CommentSteps();
@@ -68,7 +72,7 @@ public class CommentTests {
     postSteps.deleteLastPost();
   }
 
-  @After
+  @AfterMethod
   public void tearDown() throws Exception {
     Browser.kill();
   }

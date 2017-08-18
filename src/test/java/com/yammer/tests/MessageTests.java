@@ -1,16 +1,17 @@
 package com.yammer.tests;
 
-import static org.junit.Assert.assertTrue;
+import static org.testng.Assert.assertTrue;
 
+import com.yammer.business_objects.Group;
 import com.yammer.business_objects.Message;
 import com.yammer.business_objects.User;
 import com.yammer.steps.LoginSteps;
 import com.yammer.steps.MessageSteps;
 import com.yammer.utils.Browser;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 public class MessageTests {
 
@@ -21,10 +22,15 @@ public class MessageTests {
 
   @BeforeClass
   public void beforeClass() {
-    user = new User("ararat@epam.com", "conditional");
+    /*
+    String name = System.getProperty("username");
+    String password = System.getProperty("password");
+    user = new User(name, password);
+    */
+    user = new User("araratk@epam.com","promololol");
   }
 
-  @Before
+  @BeforeMethod
   public void setUp() throws Exception {
     browser = Browser.getBrowserInstance();
     loginSteps = new LoginSteps();
@@ -43,7 +49,7 @@ public class MessageTests {
     assertTrue(messageSteps.checkSentMessage(user.getMessage()));
   }
 
-  @After
+  @AfterMethod
   public void tearDown() throws Exception {
     Browser.kill();
   }

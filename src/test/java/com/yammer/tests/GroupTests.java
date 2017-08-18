@@ -1,7 +1,7 @@
 package com.yammer.tests;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.testng.Assert.assertFalse;
+import static org.testng.Assert.assertTrue;
 
 import com.yammer.business_objects.Group;
 import com.yammer.business_objects.User;
@@ -9,10 +9,10 @@ import com.yammer.steps.GroupSteps;
 import com.yammer.steps.LoginSteps;
 import com.yammer.steps.SearchSteps;
 import com.yammer.utils.Browser;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 public class GroupTests {
 
@@ -24,10 +24,15 @@ public class GroupTests {
 
   @BeforeClass
   public void beforeClass() {
-    user = new User("ararat@epam.com", "conditional");
+    /*
+    String name = System.getProperty("username");
+    String password = System.getProperty("password");
+    user = new User(name, password);
+    */
+    user = new User("araratk@epam.com","promololol");
   }
 
-  @Before
+  @BeforeMethod
   public void setUp() throws Exception {
     browser = Browser.getBrowserInstance();
     groupSteps = new GroupSteps();
@@ -75,7 +80,7 @@ public class GroupTests {
     assertFalse(groupSteps.isGroupMember());
   }
 
-  @After
+  @AfterMethod
   public void tearDown() throws Exception {
     Browser.kill();
   }

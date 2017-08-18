@@ -18,4 +18,11 @@ public class LoginSteps {
       loginPage.clickSubmit();
     }
   }
+  /*
+  public void login(User user){
+    loginPage.setLogin(user.getUserName());
+    loginPage.setPassword(user.getPassword());
+    loginPage.clickSubmit();
+  }
+  */
 }

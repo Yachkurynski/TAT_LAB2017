@@ -9,9 +9,7 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -27,7 +25,7 @@ public class Browser {
   private Actions actions;
   private static Browser instance;
   private static final int WAIT_ELEMENT_TIMEOUT = 10;
-  private static final int PAGE_LOAD_DEFAULT_TIMEOUT_SECONDS = 60;
+  private static final int PAGE_LOAD_DEFAULT_TIMEOUT_SECONDS = 20;
   private static final int COMMAND_DEFAULT_TIMEOUT_SECONDS = 20;
 
   private Browser(WebDriver driver) {

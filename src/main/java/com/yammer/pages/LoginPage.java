@@ -6,8 +6,8 @@ import org.openqa.selenium.Keys;
 public class LoginPage extends AbstractPage {
 
   private static By FIELD_LOGIN_LOCATOR = By.id("cred_userid_inputtext");
-  private static By FIELD_PASSWORD_LOCATOR = By.id("cred_password_inputtext");
-  private static By BUTTON_SUBMIT_LOCATOR = By.id("cred_sign_in_button");
+  private static By FIELD_PASSWORD_LOCATOR = By.id("passwordInput");
+  private static By BUTTON_SUBMIT_LOCATOR = By.id("submitButton");
   private static By LOAD_ELEMENT_LOCATOR = By.id("credentials");
 
   public void setPassword(String password) {
