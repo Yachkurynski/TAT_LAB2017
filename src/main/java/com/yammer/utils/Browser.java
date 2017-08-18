@@ -66,7 +66,7 @@ public class Browser {
 
   public void waitForElementEnabled(By locator) {
     new WebDriverWait(driver, WAIT_ELEMENT_TIMEOUT)
-        .until(ExpectedConditions.elementToBeClickable(locator));
+        .until(ExpectedConditions.presenceOfAllElementsLocatedBy(locator));
   }
 
   public void waitTextToBePresentInElement(By locator, String text) {
