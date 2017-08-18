@@ -25,7 +25,7 @@ public class Browser {
   private Actions actions;
   private static Browser instance;
   private static final int WAIT_ELEMENT_TIMEOUT = 10;
-  private static final int PAGE_LOAD_DEFAULT_TIMEOUT_SECONDS = 20;
+  private static final int PAGE_LOAD_DEFAULT_TIMEOUT_SECONDS = 60;
   private static final int COMMAND_DEFAULT_TIMEOUT_SECONDS = 20;
 
   private Browser(WebDriver driver) {
@@ -65,13 +65,15 @@ public class Browser {
   }
 
   public void waitForElementEnabled(By locator) {
-    new WebDriverWait(driver, WAIT_ELEMENT_TIMEOUT)
-        .until(ExpectedConditions.presenceOfAllElementsLocatedBy(locator));
+    //new WebDriverWait(driver, WAIT_ELEMENT_TIMEOUT)
+    //    .until(ExpectedConditions.presenceOfAllElementsLocatedBy(locator));
+    driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
   }
 
   public void waitTextToBePresentInElement(By locator, String text) {
-    new WebDriverWait(driver, WAIT_ELEMENT_TIMEOUT)
-        .until(ExpectedConditions.textToBePresentInElement(driver.findElement(locator), text));
+    //new WebDriverWait(driver, WAIT_ELEMENT_TIMEOUT)
+    //    .until(ExpectedConditions.textToBePresentInElement(driver.findElement(locator), text));
+    driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
   }
 
   public void highlightElement(By locator) {
