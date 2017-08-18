@@ -14,7 +14,7 @@ public class HomePage extends AbstractPage {
   private static final By BUTTON_CREATE_GROUP_LOCATOR = By
       .xpath("//button[@title='Create a new group']");
   private static final By SEARCH_FIELD_LOCATOR = By
-      .xpath("//div[@class='yj-nav-menu--search']/input");
+      .xpath("//div[@class='yj-nav-menu--search']//input");
   private static final By BUTTON_INBOX_PAGE_LOCATOR = By.xpath("//a[@title = 'Inbox']");
   private static final By LIST_OF_GROUPS_LOCATOR = By
       .xpath("//*[contains(@class,'text-wrapper') and ancestor::li[contains(@class,'group')]]");
